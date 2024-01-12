@@ -1,0 +1,189 @@
+* {
+    /*reseteo del estilo del navegador*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*todas las cajas hacen un recalculo de sus tamaños definidos inicialmente en caso de crear elementos dentro de ella o se establezcan márgenes exteriores o inferiores*/
+    font-family: sans-serif;
+    text-decoration: none;
+    text-align: justify;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+.container {
+    /*container es el padre de las etiquetas header, section, aside, footer*/
+    margin: auto;
+    /*para que este centrado siempre*/
+    max-width: 1200px;
+    /*después de 1200 ya no aumenta mas su ancho*/
+    width: 90%;
+    /*ancho total dentro del navegador*/
+
+    display: flex;
+    flex-flow: row wrap;
+    /*distribuye el espacio en proporciones: el ítem se ajusta y toma todo el espacio disponible o una proporción del espacio disponible*/
+}
+
+header,
+footer {
+    /*padre de la etiqueta nav y de un h2*/
+    background-color: gold;
+    color: white;
+    padding: 1em;
+    align-items: center;
+    /*alinea los items de manera vertical*/
+    display: flex;
+    /*se le puede asignar flex porque contiene otros items hijos*/
+    flex-basis: 100%;
+    /*define el tamaño de un ítem en términos del espacio que deja como espacio disponible*/
+    flex-flow: row wrap;
+    /*ordena el h2 y el nav en forma de filas*/
+    justify-content: space-between;
+}
+
+header nav {
+
+    padding: 1em;
+    text-align: center;
+    flex-basis: 30%;
+}
+
+header nav a {
+    color: #ffff;
+    padding: 1em;
+    text-transform: uppercase;
+    justify-content: space-around;
+    /*recalcula el espacio para distribuirlo de manera adecuada*/
+}
+
+header nav a:hover {
+    background-color: goldenrod;
+}
+
+section {
+    background-color: #ffffffff;
+    padding: 1.5em;
+    flex: 1 1 60%;
+}
+
+section p,
+section hr,
+section h1 {
+    margin-bottom: 1em;
+    /*margen inferior*/
+}
+
+aside {
+    flex: 1 1 40%;
+}
+
+aside p {
+    margin: 1em;
+    padding: 1em;
+}
+
+footer {
+    padding: 1.5em 0;
+    position: fixed;
+    bottom: 0;
+    margin: auto;
+    /*para que este centrado siempre*/
+    max-width: 1200px;
+    /*después de 1200 ya no aumenta mas su ancho*/
+    width: 90%;
+    justify-content: center;
+}
+
+/*@media query para que los enlaces del nav queden en la parte inferior cuando la pantalla sea pequeña */
+
+/*cuando el tamaño de pantalla sea maximo de 760px: tablets/smartphones*/
+
+@media (max-width: 1200px) {
+    header nav {
+        flex-basis: 40%;
+    }
+}
+
+@media (max-width: 1024px) {
+    header nav {
+        flex-basis: 50%;
+    }
+}
+
+@media (max-width: 820px) {
+    .container {
+        flex-direction: column;
+    }
+
+    header {
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
+
+    header nav {
+        flex-basis: 100%;
+    }
+
+    h2 {
+        padding: 1em 0;
+    }
+}
+
+@media (max-width: 280px) {
+    header nav a {
+
+        padding: 0.5em;
+    }
+}
+
+
+/*contenedor flex: Un área del documento que contiene un flexbox es llamada contendedor flex. 
+Para crear un contenedor flex, establecemos la propiedad del área del contenedor display como flex o inline-flex.
+Tan pronto como hacemos esto, los hijos directos de este contenedor se vuelven ítems flex. 
+Como con todas las propiedades de CSS, se definen algunos valores iniciales, así que cuando creemos un contenedor
+flex todos los ítems flex contenidos se comportarán de la siguiente manera:
+- Los ítems se despliegan sobre una fila (la propiedad flex-direction por defecto es row).
+- Los ítems empiezan desde el margen inicial sobre el eje principal.
+- Los ítems no se ajustan en la dimensión principal, pero se pueden contraer.
+- Los ítems se ajustarán para llenar el tamaño del eje cruzado.
+- La propiedad flex-basis es definida como auto.
+- La propiedad flex-wrap es definida como nowrap.
+El resultado es que todos los ítems se alinearán en una solo fila, usando el tamaño del contenedor como 
+su tamaño en el eje principal. Si hay más ítems de los que caben en el contenedor, 
+estos no pasarán más abajo si no que sobrepasarán el margen. 
+Si hay ítems más altos que otros, todos los ítems serán ajustados en el eje cruzado para alcanzar al mayor.*/
+
+/*Propiedades de los items flex::
+concepto de espacio disponible: Lo que hacemos cuando cambiamos el valor de alguna de estas propiedades es cambiar la forma 
+en que se distribuye el espacio disponible entre nuestros ítems. 
+Si tenemos tres ítems con un ancho de 100 pixeles en un contenedor de 500 pixeles de ancho, entonces el espacio que se necesita 
+para colocar nuestros ítems es de 300 pixeles. Esto deja 200 pixeles de espacio disponible. 
+Si no cambiamos los valores iniciales entonces flexbox colocará ese espacio después del último ítem.
+Si, en cambio, quisiéramos que los ítems crecieran para llenar ese espacio, entonces necesitaremos 
+un método para distribuir el espacio sobrante entre los ítems. 
+Es justo lo que harán las propiedades flex que aplicaremos a dichos ítems.
+
+flex-basis: define el tamaño de un ítem en términos del espacio que deja como espacio disponible. 
+El valor inicial de esta propiedad es auto — en este caso el navegador revisa si los ítems definen un tamaño.
+Si los ítems no tienen un tamaño, entonces el tamaño de su contenido es usado como flex-basis. 
+Y por eso, apenas declarado display: flex en el padre a fin de crear ítems flex, 
+todos estos ítems se ubicaron en una sola fila y tomaron solo el espacio necesario para desplegar su contenido
+
+flex-grow: definida como un entero positivo.
+Los ítems flex pueden crecer en el eje principal a partir de flex-basis. 
+Esto hará que el ítem se ajuste y tome todo el espacio disponible del eje, o una proporción del espacio disponible 
+si otro ítem también puede crecer.
+Podemos usar flex-grow apropiadamente para distribuir el espacio en proporciones. 
+
+flex-shrink: controla como se contrae el espacio sobre el eje principal. 
+Si no contamos con suficiente espacio en el contenedor para colocar los ítems y flex-shrink posee un valor entero positivo, 
+el ítem puede contraerse a partir de flex-basis. 
+Así como podemos asignar diferentes valores de flex-grow con el fin que un ítem se expanda más rápido que otros — 
+un ítem con un valor más alto de flex-shrink se contraerá más rápido que sus hermanos que poseen valores menores.
+El tamaño mínimo del ítem tendrá que ser considerado cuando se determine un valor de contracción que pueda funcionar, 
+esto significa que flex-shrink tiene el potencial de comportarse menos consistentemente que flex-grow. 
+*/
